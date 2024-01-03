@@ -13,7 +13,7 @@ export const fetchMovies = async (endpoint) => {
     );
     return response.data.results;
   } catch (error) {
-    console.error("Error fetching popular movies:", error);
+    console.error("Error fetching movies:", error);
     return [];
   }
 };

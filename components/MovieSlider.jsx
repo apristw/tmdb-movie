@@ -15,7 +15,6 @@ function MovieSlider({ apiKey, endpoint, title }) {
     const fetchData = async () => {
       const movieList = await fetchMovies(endpoint);
       const movieGenres = await fetchGenres(apiKey);
-
       setMovies(movieList);
       setGenres(movieGenres);
     };
