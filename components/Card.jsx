@@ -14,8 +14,9 @@ function Card({ title, release_date, genres, genre_ids, image, rating }) {
           <Image
             src={`${process.env.NEXT_PUBLIC_IMG_URL_POSTER}/${image}`}
             alt="foto"
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="(max-width: 768px) 100vw,(max-width: 1200px) 50vw,33vw"
+            style={{ objectFit: "cover" }}
             quality={100}
             priority
           />

@@ -29,8 +29,8 @@ function Hero({ endpoint }) {
               <Image
                 src={`${process.env.NEXT_PUBLIC_IMG_URL}/${posterMovie.backdrop_path}`}
                 alt="foto"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 quality={100}
                 priority
               />
