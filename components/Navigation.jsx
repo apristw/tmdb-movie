@@ -1,36 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Search from "./Search";
 import { useRouter } from "next/router";
-import axios from "axios";
 
-function Navigation() {
+function Navigation({
+  handleSelectMovie,
+  results,
+  handleSearchMovie,
+  handleChange,
+  query,
+}) {
   const route = useRouter();
-
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-
-  const handleSearchMovie = async () => {
-    if (query.length > 2) {
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/search/movie?query=${query}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
-        );
-        console.log(response.data);
-        setResults(response.data.results);
-      } catch (error) {
-        console.error(`error searching movies:`, error);
-      }
-    }
-  };
-
-  const handleChangeSearch = (e) => {
-    setQuery(e.target.value);
-    if (!e.target.value) {
-      setResults([]);
-    }
-  };
-
-  // console.log(results);
 
   return (
     <div className="relative">
@@ -43,12 +22,13 @@ function Navigation() {
         </span>
         <Search
           value={query}
-          handleChangeSearch={handleChangeSearch}
-          clickHandle={handleSearchMovie}
+          handleChange={handleChange}
+          handleSearchMovie={handleSearchMovie}
           data={results}
+          handleSelectMovie={handleSelectMovie}
         />
         <div>
-          <p className="text-slate-200 font-bold cursor-pointer">Sign In</p>
+          <p className="text-slate-200 font-bold cursor-pointer">Login</p>
         </div>
       </nav>
     </div>
