@@ -11,9 +11,9 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
-  const [queryDebounce] = useDebounce(query, 3000);
+  const [queryDebounce] = useDebounce(query, 1000);
 
-  console.log([queryDebounce]);
+  console.log(results);
 
   // PR = APLIKASI MASIH BUG. SETIAP INPUTAN DIMASUKAN HALAMAN MASIH REFRESH, SETIAP MOVIE DIPILIH ATAU PILIHAN MOVIE DICLOSE MASIH REFRESH
 
@@ -21,7 +21,7 @@ export default function Home() {
     if (query.length > 0) {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/search/movie?query=${query}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
+          `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/search/movie?query=${queryDebounce}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
         );
         setResults(response.data.results);
       } catch (error) {
@@ -48,6 +48,7 @@ export default function Home() {
   };
 
   const handleChange = (e) => {
+    e.preventDefault();
     setQuery(e.target.value);
     if (!e.target.value) {
       setResults([]);
