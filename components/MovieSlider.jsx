@@ -7,7 +7,7 @@ import { fetchGenres, fetchMovies } from "@/pages/api/api";
 import { useEffect } from "react";
 import { useState } from "react";
 
-function MovieSlider({ apiKey, endpoint, title }) {
+function MovieSlider({ apiKey, endpoint, title, handleSelectMovie }) {
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
 
@@ -22,6 +22,7 @@ function MovieSlider({ apiKey, endpoint, title }) {
     fetchData();
   }, [apiKey, endpoint]);
 
+  //Settings For Slider
   const settings = {
     arrow: true,
     autoplay: true,
@@ -58,6 +59,7 @@ function MovieSlider({ apiKey, endpoint, title }) {
         {movies.map((res, index) => {
           return (
             <Card
+              movieId={res.id}
               title={res.title}
               release_date={res.release_date}
               genre_ids={res.genre_ids}
@@ -65,6 +67,7 @@ function MovieSlider({ apiKey, endpoint, title }) {
               image={res.poster_path}
               rating={res.vote_average}
               key={index}
+              handleSelectMovie={handleSelectMovie}
             />
           );
         })}

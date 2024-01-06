@@ -1,16 +1,22 @@
 import React from "react";
 import SearchResults from "./SearchResults";
 
-function Search({ value, handleChangeSearch, clickHandle, data }) {
+function Search({
+  value,
+  handleChange,
+  handleSearchMovie,
+  data,
+  handleSelectMovie,
+}) {
   return (
     <div className="relative max-w-xl w-full z-20 flex items-center bg-transparent border-2 rounded-md ">
       <input
         type="text"
         value={value}
-        onChange={handleChangeSearch}
+        onChange={handleChange}
         placeholder="What do you want to watch?"
         className="w-full text-slate-100 font-bold py-1 pl-2 pr-8 bg-transparent border-none rounded-md focus:bg-slate-500 focus:border-none focus:outline-none"
-        onKeyUp={clickHandle}
+        onKeyUp={handleSearchMovie}
       />
       <span className="absolute right-0 px-2 cursor-pointer hover:scale-105">
         <svg
@@ -29,7 +35,7 @@ function Search({ value, handleChangeSearch, clickHandle, data }) {
           />
         </svg>
       </span>
-      <SearchResults data={data} />
+      <SearchResults data={data} handleSelectMovie={handleSelectMovie} />
     </div>
   );
 }
