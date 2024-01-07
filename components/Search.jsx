@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchResults from "./SearchResults";
 
 function Search({
@@ -7,13 +7,26 @@ function Search({
   handleSearchMovie,
   data,
   handleSelectMovie,
+  queryDebounce,
 }) {
+  const [isFocus, setIsFocus] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocus(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocus(false);
+  };
+
   return (
-    <div className="relative max-w-xl w-full z-20 flex items-center bg-transparent border-2 rounded-md ">
+    <div className="relative max-w-xl w-full mx-2 z-20 flex items-center bg-transparent border-2 rounded-md ">
       <input
         type="text"
         value={value}
         onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         placeholder="What do you want to watch?"
         className="w-full text-slate-100 font-bold py-1 pl-2 pr-8 bg-transparent border-none rounded-md focus:bg-slate-500 focus:border-none focus:outline-none"
         onKeyUp={handleSearchMovie}
@@ -35,7 +48,13 @@ function Search({
           />
         </svg>
       </span>
-      <SearchResults data={data} handleSelectMovie={handleSelectMovie} />
+      {isFocus && (
+        <SearchResults
+          data={data}
+          handleSelectMovie={handleSelectMovie}
+          queryDebounce={queryDebounce}
+        />
+      )}
     </div>
   );
 }
