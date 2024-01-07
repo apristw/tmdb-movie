@@ -13,12 +13,8 @@ export default function Home() {
 
   const [queryDebounce] = useDebounce(query, 1000);
 
-  console.log(results);
-
-  // PR = APLIKASI MASIH BUG. SETIAP INPUTAN DIMASUKAN HALAMAN MASIH REFRESH, SETIAP MOVIE DIPILIH ATAU PILIHAN MOVIE DICLOSE MASIH REFRESH
-
   const performSearch = async () => {
-    if (query.length > 0) {
+    if (queryDebounce.length > 0) {
       try {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/search/movie?query=${queryDebounce}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
@@ -31,7 +27,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    performSearch();
+    if (queryDebounce.length > 0) {
+      performSearch();
+    } else {
+      setResults([]);
+    }
   }, [queryDebounce]);
 
   const handleSelectMovie = (movieId) => {
@@ -47,12 +47,9 @@ export default function Home() {
     setIdSelected(null);
   };
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    setQuery(e.target.value);
-    if (!e.target.value) {
-      setResults([]);
-    }
+  const handleChange = (event) => {
+    event.preventDefault();
+    setQuery(event.target.value);
   };
 
   return (
@@ -63,6 +60,7 @@ export default function Home() {
         handleSearchMovie={handleSearchMovie}
         results={results}
         query={query}
+        queryDebounce={queryDebounce}
       />
       <Hero endpoint={`/movie/popular`} />
       <MovieSlider
