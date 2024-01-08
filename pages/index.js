@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative px-5 lg:p-0">
+    <div className="relative">
       <Navigation
         handleSelectMovie={handleSelectMovie}
         handleChange={handleChange}
@@ -61,6 +61,7 @@ export default function Home() {
         results={results}
         query={query}
         queryDebounce={queryDebounce}
+        setQuery={setQuery}
       />
       <Hero endpoint={`/movie/popular`} />
       <MovieSlider

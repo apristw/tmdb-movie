@@ -8,6 +8,7 @@ function Search({
   data,
   handleSelectMovie,
   queryDebounce,
+  setQuery,
 }) {
   const [isFocus, setIsFocus] = useState(false);
 
@@ -16,7 +17,10 @@ function Search({
   };
 
   const handleBlur = () => {
-    setIsFocus(false);
+    setTimeout(() => {
+      setIsFocus(false);
+      setQuery("");
+    }, 150);
   };
 
   return (
@@ -53,6 +57,7 @@ function Search({
           data={data}
           handleSelectMovie={handleSelectMovie}
           queryDebounce={queryDebounce}
+          setQuery={setQuery}
         />
       )}
     </div>
