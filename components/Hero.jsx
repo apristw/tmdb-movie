@@ -20,7 +20,7 @@ function Hero({ endpoint }) {
   }, [endpoint]);
 
   const settings = {
-    arrow: true,
+    arrows: false,
     autoplay: true,
     infinite: true,
     slidesToShow: 1,

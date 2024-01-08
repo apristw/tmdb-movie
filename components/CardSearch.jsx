@@ -1,5 +1,6 @@
+import { fetchGenres } from "@/pages/api/api";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function CardSearch({
   movieId,
@@ -10,6 +11,24 @@ function CardSearch({
   image,
   handleSelectMovie,
 }) {
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    const dataGenre = async () => {
+      const movieGenres = await fetchGenres();
+
+      setGenres(movieGenres);
+    };
+
+    dataGenre();
+  }, []);
+
+
+  const movieGenre = genre.map((genre) => {
+    const genreObj = genres.find((genObj) => genObj.id === genre);
+    return genreObj ? genreObj.name : "";
+  });
+
   const selectMovieId = () => {
     handleSelectMovie(movieId);
   };
@@ -32,15 +51,15 @@ function CardSearch({
           "no img"
         )}
       </div>
-      <div className="p-1 text-slate-100">
-        <p className="font-bold truncate">{title}</p>
+      <div className="p-1 text-slate-100 overflow-hidden">
+        <p className="font-bold w-full truncate">{title}</p>
         <div className="flex gap-1 items-center">
           <span className="px-2 mr-3 font-bold text-slate-800 bg-yellow-500 rounded-md">
             {rating.toFixed(1)}
           </span>
           <p className="text-sm">{release}</p>
         </div>
-        <p>{genre}</p>
+        <p>{movieGenre.join(", ")}</p>
       </div>
     </div>
   );

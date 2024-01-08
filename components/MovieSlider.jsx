@@ -24,7 +24,7 @@ function MovieSlider({ apiKey, endpoint, title, handleSelectMovie }) {
 
   //Settings For Slider
   const settings = {
-    arrow: true,
+    arrows: false,
     autoplay: true,
     infinite: true,
     slidesToShow: 5,
@@ -48,12 +48,11 @@ function MovieSlider({ apiKey, endpoint, title, handleSelectMovie }) {
     ],
   };
   return (
-    <div className="max-w-[1440px]  mx-auto">
-      <div className="flex justify-between">
-        <h2 className="font-bold mt-16 mb-11 text-4xl">{title}</h2>
-        <p className="font-bold text-xl text-rose-700 mt-16 mb-11 cursor-pointer">
-          See More &gt;{" "}
-        </p>
+    <div className="max-w-[1440px] mx-auto">
+      <div className="">
+        <h2 className="font-bold mt-16 mb-11 text-4xl text-slate-700">
+          {title}
+        </h2>
       </div>
       <Slider {...settings}>
         {movies.map((res, index) => {

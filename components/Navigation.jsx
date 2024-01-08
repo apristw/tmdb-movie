@@ -9,6 +9,7 @@ function Navigation({
   handleChange,
   query,
   queryDebounce,
+  setQuery,
 }) {
   const route = useRouter();
 
@@ -28,6 +29,7 @@ function Navigation({
           data={results}
           handleSelectMovie={handleSelectMovie}
           queryDebounce={queryDebounce}
+          setQuery={setQuery}
         />
         <div>
           <p className="text-slate-200 font-bold cursor-pointer">Login</p>

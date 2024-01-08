@@ -4,8 +4,6 @@ import CardSearch from "./CardSearch";
 function SearchResults({ data, handleSelectMovie }) {
   const sortedData = data.sort((a, b) => b.vote_average - a.vote_average);
 
-  // console.log({ sortedData });
-
   return (
     <div className="absolute bg-slate-500 max-h-96 overflow-y-scroll w-full p-0 top-9">
       {sortedData.length > 0 ? (

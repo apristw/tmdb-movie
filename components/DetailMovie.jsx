@@ -1,10 +1,10 @@
+import { fetchGenres } from "@/pages/api/api";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 function DetailMovie({ idSelected, onClose }) {
   const [movieSelected, setMovieSelected] = useState(null);
-
   const getMovieSelected = async () => {
     try {
       const response = await axios.get(
@@ -22,6 +22,7 @@ function DetailMovie({ idSelected, onClose }) {
     }
   }, [idSelected]);
 
+
   const handleClose = (event) => {
     event.preventDefault();
     onClose();
@@ -29,8 +30,7 @@ function DetailMovie({ idSelected, onClose }) {
   };
 
   if (!movieSelected) {
-    // Tampilkan loading atau pesan lain jika data belum diambil
-    return <div>Loading...</div>;
+    return null;
   }
 
   return (
@@ -79,7 +79,10 @@ function DetailMovie({ idSelected, onClose }) {
                   <p className="">{movieSelected.release_date}</p>
                   <p>Duration : {movieSelected.runtime} Min</p>
                 </div>
-                <span className="text-slate-200">genre, genra</span>
+                <span className="text-slate-200 flex flex-wrap">
+                  {movieSelected.genres.length > 0 &&
+                    movieSelected.genres.map((genre) => genre.name).join(", ")}
+                </span>
               </div>
             </div>
             <h4 className="text-slate-200 mb-5">
@@ -142,12 +145,12 @@ function DetailMovie({ idSelected, onClose }) {
               </button>
             </div>
             <span
-              className="absolute right-2 top-2 cursor-pointer"
+              className="absolute right-1 top-1 cursor-pointer hover:scale-105 transition-all duration-150"
               onClick={handleClose}
             >
               <svg
-                width={32}
-                height={32}
+                width={28}
+                height={28}
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
