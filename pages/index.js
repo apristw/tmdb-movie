@@ -5,6 +5,7 @@ import DetailMovie from "@/components/DetailMovie";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from "use-debounce";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [idSelected, setIdSelected] = useState(null);
@@ -80,6 +81,7 @@ export default function Home() {
         handleSelectMovie={handleSelectMovie}
       />
       <DetailMovie idSelected={idSelected} onClose={handleCloseModals} />
+      <Footer />
     </div>
   );
 }
