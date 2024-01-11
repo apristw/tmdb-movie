@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from "use-debounce";
 import Footer from "@/components/Footer";
+import VideoPlayer from "@/components/VideoPlayer";
 
 export default function Home() {
   const [idSelected, setIdSelected] = useState(null);
@@ -34,6 +35,8 @@ export default function Home() {
       setResults([]);
     }
   }, [queryDebounce]);
+
+
 
   const handleSelectMovie = (movieId) => {
     setIdSelected(movieId);
@@ -81,6 +84,9 @@ export default function Home() {
         handleSelectMovie={handleSelectMovie}
       />
       <DetailMovie idSelected={idSelected} onClose={handleCloseModals} />
+      <div>
+        <VideoPlayer movieId={idSelected} />
+      </div>
       <Footer />
     </div>
   );

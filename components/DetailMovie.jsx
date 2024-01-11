@@ -2,6 +2,7 @@ import { fetchGenres } from "@/pages/api/api";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import VideoPlayer from "./VideoPlayer";
 
 function DetailMovie({ idSelected, onClose }) {
   const [movieSelected, setMovieSelected] = useState(null);
@@ -21,7 +22,6 @@ function DetailMovie({ idSelected, onClose }) {
       getMovieSelected();
     }
   }, [idSelected]);
-
 
   const handleClose = (event) => {
     event.preventDefault();
@@ -166,6 +166,7 @@ function DetailMovie({ idSelected, onClose }) {
             </span>
           </div>
         </div>
+        <VideoPlayer />
       </div>
     )
   );
