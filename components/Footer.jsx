@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="max-w-[1440px] mx-auto mt-14 ">
+    <footer className="max-w-[1440px] mx-auto">
       <div className="text-center text-slate-700">
         <ul className="flex mb-5 space-x-10  font-bold justify-center items-center text-xl">
           <li className="cursor-pointer hover:scale-105">Conditions of Use</li>

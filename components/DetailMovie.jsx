@@ -3,7 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-function DetailMovie({ idSelected, onClose }) {
+function DetailMovie({ idSelected, onClose, setKeyVideo }) {
   const [movieSelected, setMovieSelected] = useState(null);
   const getMovieSelected = async () => {
     try {
@@ -22,7 +22,6 @@ function DetailMovie({ idSelected, onClose }) {
     }
   }, [idSelected]);
 
-
   const handleClose = (event) => {
     event.preventDefault();
     onClose();
@@ -32,6 +31,10 @@ function DetailMovie({ idSelected, onClose }) {
   if (!movieSelected) {
     return null;
   }
+
+  const handleClick = () => {
+    setKeyVideo(movieSelected.id);
+  };
 
   return (
     idSelected !== null && (
@@ -50,7 +53,7 @@ function DetailMovie({ idSelected, onClose }) {
           <div className="p-5 w-2/3">
             <p className="text-2xl text-white mb-2">{movieSelected.title}</p>
             <div className="flex items-center mb-2">
-              <div className="">
+              <div>
                 <svg
                   width={42}
                   height={42}
@@ -89,7 +92,7 @@ function DetailMovie({ idSelected, onClose }) {
               Overview : {movieSelected.overview}
             </h4>
             <div className="space-x-5 flex">
-              <button className="py-2 px-3 border rounded-md flex bg-slate-200 hover:bg-white text-[#171717]">
+              {/* <button className="py-2 px-3 border rounded-md flex bg-slate-200 hover:bg-white text-[#171717]">
                 <span className="mr-2">
                   <svg
                     width={20}
@@ -115,8 +118,11 @@ function DetailMovie({ idSelected, onClose }) {
                   </svg>
                 </span>{" "}
                 Play Now
-              </button>
-              <button className="py-2 px-3 text-white border border-white rounded-md hover:bg-slate-700 flex">
+              </button> */}
+              <button
+                className="py-2 px-3 text-white border border-white rounded-md hover:bg-slate-700 flex"
+                onClick={handleClick}
+              >
                 <span className="mr-2">
                   <svg
                     width={20}

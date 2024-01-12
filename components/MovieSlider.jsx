@@ -7,7 +7,12 @@ import { fetchGenres, fetchMovies } from "@/pages/api/api";
 import { useEffect } from "react";
 import { useState } from "react";
 
-function MovieSlider({ apiKey, endpoint, title, handleSelectMovie }) {
+function MovieSlider({
+  apiKey,
+  endpoint,
+  title,
+  handleSelectMovie,
+}) {
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
 
@@ -50,7 +55,7 @@ function MovieSlider({ apiKey, endpoint, title, handleSelectMovie }) {
   return (
     <div className="max-w-[1440px] mx-auto">
       <div className="">
-        <h2 className="font-bold mt-16 mb-11 text-4xl text-slate-700">
+        <h2 className="font-bold mt-16 mb-5 text-4xl text-slate-700">
           {title}
         </h2>
       </div>
