@@ -34,3 +34,20 @@ export const fetchGenres = async () => {
     return [];
   }
 };
+
+export const fetchVideoKey = async (movieId) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_TMDB_BASE_URL}/movie/${movieId}/videos`,
+      {
+        params: {
+          api_key: process.env.NEXT_PUBLIC_TMDB_KEY,
+        },
+      }
+    );
+    return response.data.results;
+  } catch (error) {
+    console.log("error fetching video key", error);
+    return null;
+  }
+};

@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function Hero({ endpoint }) {
+function Hero({ endpoint, setKeyVideo }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,16 @@ function Hero({ endpoint }) {
       {movies !== null && (
         <Slider {...settings}>
           {movies.map((movie, index) => {
-            return <CardHero movies={movie} key={index} />;
+            return (
+              <CardHero
+                key={index}
+                movieId={movie.id}
+                image={movie.backdrop_path}
+                title={movie.title}
+                overview={movie.overview}
+                setKeyVideo={setKeyVideo}
+              />
+            );
           })}
         </Slider>
       )}

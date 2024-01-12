@@ -1,13 +1,19 @@
 import Image from "next/image";
 import React from "react";
 
-function CardHero({ movies }) {
+function CardHero({ movieId, image, title, overview, setKeyVideo }) {
+  // console.log({ movies });
+  const handleClick = (e) => {
+    e.preventDefault();
+    setKeyVideo(movieId);
+  };
+
   return (
     <div className="max-w-[1440px] h-[600px] mx-auto">
       <div className="relative">
         <div className="absolute h-[600px] max-w-[1440px] w-full -z-10">
           <Image
-            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${movies.backdrop_path}`}
+            src={`${process.env.NEXT_PUBLIC_IMG_URL}/${image}`}
             alt="foto"
             fill
             style={{ objectFit: "cover" }}
@@ -18,9 +24,12 @@ function CardHero({ movies }) {
       </div>
       <div className="relative text-slate-100 w-[415px] pt-32 pl-24 p-5">
         <div className="absolute">
-          <h1 className="lg:text-5xl font-bold">{movies.title}</h1>
-          <p className="py-4 text-sm">{movies.overview}</p>
-          <button className="flex text-sm font-bold py-2 px-3 rounded-md uppercase bg-rose-800 hover:bg-rose-900">
+          <h1 className="lg:text-5xl font-bold">{title}</h1>
+          <p className="py-4 text-sm">{overview}</p>
+          <button
+            className="flex text-sm font-bold py-2 px-3 rounded-md uppercase bg-rose-800 hover:bg-rose-900"
+            onClick={handleClick}
+          >
             Watch Trailer{" "}
             <span className="ml-2">
               <svg
